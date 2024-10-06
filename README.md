@@ -23,7 +23,7 @@ Vous pouvez aussi suivre les consignes ci-dessous:
 
 ## Étape 2 : Structure de la RDB
 
-La structure actuelle de la table `Commandes_Version_Initiale` est la suivante :
+Prenez le temps d'observer la structure actuelle de la table `Commandes_Version_Initiale` ainsi que les données qu'elle contient. Voici la structure :
 
 | No_Client | Nom                | Adresse            | Code_Postal | Ville | Canton | Numéro_de_Commande | Date_de_Commande | Ligne | Article                | Quantité | Prix_Unitaire |
 |-----------|--------------------|--------------------|-------------|-------|--------|--------------------|------------------|-------|------------------------|----------|---------------|
@@ -62,6 +62,8 @@ CREATE TABLE Clients (
 );
 ```
 
+Cette table se dérive facilement de la table initiale, puisqu'il y avait déjà un numéro de client.
+
 ### Création de la table Articles
 
 ```sql
@@ -72,7 +74,7 @@ CREATE TABLE Articles (
 );
 ```
 
-Notez que nous ajoutons un identifiant nommé `Article_ID` généré automatiquement par la RDB (`SERIAL`).
+Notez que nous ajoutons un identifiant nommé `Article_ID` généré automatiquement par la RDB (`SERIAL`). Sans cela, nous aurions du utiliser `Nom_Article` comme clé primaire, ce qui aurait été un mauvais choix.
 
 
 ### "Nouvelle" table Commandes
@@ -92,7 +94,7 @@ CREATE TABLE Commandes (
     FOREIGN KEY (Article_ID) REFERENCES Articles(Article_ID)
 );
 ```
-
+Notez la clé primaire composite sur le numéro de commande et la ligne dans chaque commande. 
 Notez les contraintes sur les clés étrangères.
 
 
@@ -109,8 +111,6 @@ Notez les contraintes sur les clés étrangères.
 
 Nous devons d'abord peupler la table `Clients` avec des données **uniques**. Nous allons sélectionner des clients distincts de la table d'origine et les insérer dans la nouvelle table.
 
-#### Commande SQL pour insérer des clients
-
 ```sql
 INSERT INTO Clients (No_Client, Nom, Adresse, Code_Postal, Ville, Canton)
 SELECT DISTINCT 
@@ -126,9 +126,7 @@ FROM
 
 ### Étape 7 : Insérer des données dans la table Articles
 
-Nous allons ensuite insérer les articles dans la table `Articles`. Comme le nom de l'article peut apparaître plusieurs fois avec différents prix, nous devons d'abord sélectionner des articles distincts.
-
-#### Commande SQL pour insérer des articles
+Nous allons ensuite insérer les articles dans la table `Articles`. 
 
 ```sql
 INSERT INTO Articles (Nom_Article, Prix_Unitaire)
@@ -139,11 +137,12 @@ FROM
     Commandes_Version_Initiale;
 ```
 
+Notez que comme le nom de l'article peut apparaître plusieurs fois avec différents prix, nous devons d'abord sélectionner des articles distincts.
+
+
 ### Étape 8 : Insérer des données dans la table Commandes
 
 Enfin, nous allons insérer les données dans la table `Commandes`. Pour cela, nous devons nous assurer que nous faisons correspondre les IDs des articles et les IDs des clients.
-
-#### Commande SQL pour insérer des commandes
 
 ```sql
 INSERT INTO Commandes (Numero_de_Commande, No_Client, Date_de_Commande, Ligne, Article_ID, Quantite)
