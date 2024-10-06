@@ -5,11 +5,20 @@
 * Renaud Richardet
 
 ## Objectif
-Dans ce mini labo, vous allez normaliser une base de données de commandes pour la brasserie du Traquenard, en appliquant les principes de normalisation jusqu'à la troisième forme normale (3NF). Vous apprendrez à identifier les dépendances fonctionnelles, à créer des tables et à relier celles-ci par des clés étrangères.
+Dans ce mini labo, vous allez normaliser une RDB étape par étape.
+
+## Scénario
+Votre meilleure amie travaille à la brasserie du Traquenard. Jusqu'ici elle a fait sa comptabilité dans une feuille Excel, mais la méthode montre ses limites. Elle aimerait que vous créiez une base de donnée pour gérer ses commandes. Comme vous êtes une personne méticuleuse, vous allez appliquer les principes de normalisation jusqu'à la troisième forme normale (3NF). Pour cela vous devrez identifier les dépendances fonctionnelles, créer des tables et relier celles-ci par des clés étrangères.
 
 ## Étape 1 : Récupération de la RDB initiale
 
-Créez une nouvelle base de donnée (par exemple: série_5_normalisation) puis populez-la avec le script [traquenard.sql](traquenard.sql)
+Créez une nouvelle base de donnée (par exemple: série_5_normalisation) puis populez-la avec le script [traquenard.sql](traquenard.sql).
+
+Vous pouvez maintenant décider de réaliser vous-même tout seul les étapes de normalisation. 
+
+![free_solo.png](free_solo.png)
+
+Vous pouvez aussi suivre les consignes ci-dessous:
 
 
 ## Étape 2 : Structure de la RDB
@@ -57,11 +66,14 @@ CREATE TABLE Clients (
 
 ```sql
 CREATE TABLE Articles (
-    Article_ID INT PRIMARY KEY,
+    Article_ID SERIAL PRIMARY KEY,
     Nom_Article VARCHAR(100),
     Prix_Unitaire DECIMAL(10, 2)
 );
 ```
+
+Notez que nous ajoutons un identifiant nommé `Article_ID` généré automatiquement par la RDB (`SERIAL`).
+
 
 ### "Nouvelle" table Commandes
 
@@ -136,12 +148,12 @@ Enfin, nous allons insérer les données dans la table `Commandes`. Pour cela, n
 ```sql
 INSERT INTO Commandes (Numero_de_Commande, No_Client, Date_de_Commande, Ligne, Article_ID, Quantite)
 SELECT 
-    Numéro_de_Commande, 
+    Numero_de_Commande, 
     No_Client, 
     Date_de_Commande, 
     Ligne, 
     (SELECT Article_ID FROM Articles WHERE Nom_Article = Article) AS Article_ID,
-    Quantité
+    Quantite
 FROM
     Commandes_Version_Initiale;
 ```
