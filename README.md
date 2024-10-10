@@ -10,15 +10,17 @@ Dans ce mini labo, vous allez normaliser une RDB étape par étape.
 ## Scénario
 Votre meilleure amie travaille à la brasserie du Traquenard. Jusqu'ici elle a fait sa comptabilité dans une feuille Excel, mais la méthode montre ses limites. Elle aimerait que vous créiez une base de donnée pour gérer ses commandes. Comme vous êtes une personne méticuleuse, vous allez appliquer les principes de normalisation jusqu'à la troisième forme normale (3NF). Pour cela vous devrez identifier les dépendances fonctionnelles, créer des tables et relier celles-ci par des clés étrangères.
 
+![table_overview.png](table_overview.png)
+
 ## Étape 1 : Récupération de la RDB initiale
 
-Créez une nouvelle base de donnée (par exemple: série_5_normalisation) puis populez-la avec le script [traquenard.sql](traquenard.sql).
+Créez une nouvelle base de donnée (par exemple: serie_normalisation) puis populez-la avec le script [traquenard.sql](traquenard.sql).
 
 Vous pouvez maintenant décider de réaliser vous-même tout seul les étapes de normalisation. 
 
 ![free_solo.png](free_solo.png)
 
-Vous pouvez aussi suivre les consignes ci-dessous:
+Vous pouvez aussi réaliser pas-à-pas les consignes ci-dessous:
 
 
 ## Étape 2 : Structure de la RDB
@@ -27,7 +29,10 @@ Prenez le temps d'observer la structure actuelle de la table `Commandes_Version_
 
 | No_Client | Nom                | Adresse            | Code_Postal | Ville | Canton | Numéro_de_Commande | Date_de_Commande | Ligne | Article                | Quantité | Prix_Unitaire |
 |-----------|--------------------|--------------------|-------------|-------|--------|--------------------|------------------|-------|------------------------|----------|---------------|
-| 21        | Café de l'Arc      | Rue de l'Arc 18    | 1950        | Sion  | VS     | 1                  | 24.09.2024       | 1     | Pale Ale               | 12       | 2.8           |
+| 21 | Café de l'Arc | Rue de l'Arc 18 | 1950 | Sion | VS | 1 | 2024-09-24 | 2 | Vintage IPA | 12 | 3.10 |
+| 23 | Café de l’Union | Rue de l’Union 1 | 1950 | Sion | VS | 2 | 2024-09-25 | 3 | Amber Ale | 1 | 3.15 |
+| 12 | Café des Alpes | Rue des Alpes 25 | 1950 | Sion | VS | 14 | 2024-09-30 | 1 | Pale Ale | 4 | 2.80 |
+| 19 | La Place | Place du Midi | 1950 | Sion | VS | 8 | 2024-09-28 | 1 | Strong Ale Barrique | 2 | 3.30 |
 | ...       | ...                | ...                | ...         | ...   | ...    | ...                | ...              | ...   | ...                    | ...      | ...           |
 
 **Problèmes Identifiés :**
