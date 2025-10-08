@@ -35,6 +35,8 @@ Prenez le temps d'observer la structure actuelle de la table `Commandes_Version_
 | 19 | La Place | Place du Midi | 1950 | Sion | VS | 8 | 2024-09-28 | 1 | Strong Ale Barrique | 2 | 3.30 |
 | ...       | ...                | ...                | ...         | ...   | ...    | ...                | ...              | ...   | ...                    | ...      | ...           |
 
+(la colone `Ligne` correspond à un article d'une commande, comme quand vous achetez un article en ligne et que votre commande comporte plusieurs articles)
+
 **Problèmes Identifiés :**
 - Redondance des données (par exemple, les informations sur le client sont répétées pour chaque commande).
 - Dépendances fonctionnelles inappropriées (le prix unitaire dépend de l'article, pas de la commande).
