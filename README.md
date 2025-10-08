@@ -109,7 +109,7 @@ Notez les contraintes sur les clés étrangères.
 
 **Troisième Forme Normale (3NF)** : Une table est en 3NF si elle est en 2NF et que toutes les colonnes non-clé sont non transitivement dépendantes de la clé primaire.
 
-**Action** : La table `Articles` doit avoir une clé primaire et éviter les dépendances transitives. Nous avons déjà une clé primaire (Article_ID). Les informations sur le prix unitaire sont directement liées à l'article et ne dépendent pas de la commande.
+**Action** : La table `Articles` doit avoir une clé primaire et éviter les dépendances transitives. Nous avons déjà une clé primaire (Article_ID). Les informations sur le prix unitaire sont directement liées à l'article et ne dépendent pas de la commande. Donc, nous sommes déjà ainsi en 3NF.
 
 
 
